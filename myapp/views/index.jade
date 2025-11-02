@@ -3,3 +3,33 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+
+  form(action="/" method="post" id="userForm")
+    div
+      label(for="name") Your Name:
+      input(type="text" id="name" name="name" placeholder="Enter your name")
+    br
+    div
+      label(for="email") Your Email:
+      input(type="email" id="email" name="email" placeholder="Enter your email")
+    br
+    button(type="submit") Submit
+    p#message
+
+  script.
+    const form = document.getElementById('userForm');
+    const message = document.getElementById('message');
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault(); // 阻止页面刷新
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+
+      if (!name || !email) {
+        message.textContent = "Please give us your info, thank you!";
+        message.style.color = "red";
+      } else {
+        message.textContent = "Thank you for your participation!";
+        message.style.color = "green";
+      }
+    });
